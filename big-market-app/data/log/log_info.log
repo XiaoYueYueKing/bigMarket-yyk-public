@@ -1,0 +1,32 @@
+24-10-26.22:04:32.708 [main            ] INFO  StrategyTest           - Starting StrategyTest using Java 11.0.23 on LAPTOP-K8F0UKJ2 with PID 31660 (started by yueyueking in E:\MyFiles\WorkAndCode\Java\big-market\big-market\big-market-app)
+24-10-26.22:04:32.709 [main            ] INFO  StrategyTest           - The following 1 profile is active: "dev"
+24-10-26.22:04:33.208 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-10-26.22:04:33.211 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-10-26.22:04:33.231 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+24-10-26.22:04:34.211 [main            ] INFO  Version                - Redisson 3.23.4
+24-10-26.22:04:34.663 [redisson-netty-2-4] INFO  MasterPubSubConnectionPool - 1 connections initialized for 192.168.101.132/192.168.101.132:16379
+24-10-26.22:04:34.682 [redisson-netty-2-13] INFO  MasterConnectionPool   - 5 connections initialized for 192.168.101.132/192.168.101.132:16379
+24-10-26.22:04:35.794 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-10-26.22:04:35.836 [main            ] INFO  StrategyTest           - Started StrategyTest in 3.406 seconds (JVM running for 3.968)
+24-10-26.22:04:36.169 [main            ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+24-10-26.22:04:36.343 [main            ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+24-10-26.22:04:36.390 [main            ] INFO  StrategyTest           - 测试结果：true
+24-10-26.22:04:36.393 [main            ] INFO  StrategyTest           - 测试结果：103 - 奖品ID值
+24-10-26.22:04:36.430 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+24-10-26.22:04:36.435 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+24-10-26.22:04:43.048 [main            ] INFO  StrategyTest           - Starting StrategyTest using Java 11.0.23 on LAPTOP-K8F0UKJ2 with PID 17648 (started by yueyueking in E:\MyFiles\WorkAndCode\Java\big-market\big-market\big-market-app)
+24-10-26.22:04:43.049 [main            ] INFO  StrategyTest           - The following 1 profile is active: "dev"
+24-10-26.22:04:43.554 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-10-26.22:04:43.556 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-10-26.22:04:43.580 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+24-10-26.22:04:44.515 [main            ] INFO  Version                - Redisson 3.23.4
+24-10-26.22:04:44.944 [redisson-netty-2-5] INFO  MasterPubSubConnectionPool - 1 connections initialized for 192.168.101.132/192.168.101.132:16379
+24-10-26.22:04:44.961 [redisson-netty-2-13] INFO  MasterConnectionPool   - 5 connections initialized for 192.168.101.132/192.168.101.132:16379
+24-10-26.22:04:46.008 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-10-26.22:04:46.048 [main            ] INFO  StrategyTest           - Started StrategyTest in 3.266 seconds (JVM running for 3.79)
+24-10-26.22:04:46.381 [main            ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+24-10-26.22:04:46.547 [main            ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+24-10-26.22:04:46.591 [main            ] INFO  StrategyTest           - 测试结果：true
+24-10-26.22:04:46.601 [main            ] INFO  StrategyTest           - 测试结果：101
+24-10-26.22:04:46.634 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+24-10-26.22:04:46.640 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
