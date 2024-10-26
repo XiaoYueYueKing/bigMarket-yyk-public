@@ -30,7 +30,6 @@ public class StrategyTest {
     @Resource
     private IStrategyDispatch strategyDispatch;
 
-
     /**
      * 策略ID；100001L、100002L 装配的时候创建策略表写入到 Redis Map 中
      */
