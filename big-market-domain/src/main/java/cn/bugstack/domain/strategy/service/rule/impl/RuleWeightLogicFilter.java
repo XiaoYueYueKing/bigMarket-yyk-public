@@ -43,7 +43,6 @@ public class RuleWeightLogicFilter implements ILogicFilter<RuleActionEntity.Raff
 
         String userId = ruleMatterEntity.getUserId();
         Long strategyId = ruleMatterEntity.getStrategyId();
-        //查询rule规则
         String ruleValue = repository.queryStrategyRuleValue(ruleMatterEntity.getStrategyId(), ruleMatterEntity.getAwardId(), ruleMatterEntity.getRuleModel());
 
         // 1. 根据用户ID查询用户抽奖消耗的积分值，本章节我们先写死为固定的值。后续需要从数据库中查询。
@@ -60,7 +59,6 @@ public class RuleWeightLogicFilter implements ILogicFilter<RuleActionEntity.Raff
         Collections.sort(analyticalSortedKeys);
 
         // 3. 找出最小符合的值，也就是【4500 积分，能找到 4000:102,103,104,105】、【5000 积分，能找到 5000:102,103,104,105,106,107】
-        //如果积分大于key，且这个key最接近的符合的值
         Long nextValue = analyticalSortedKeys.stream()
                 .filter(key -> userScore >= key)
                 .findFirst()
