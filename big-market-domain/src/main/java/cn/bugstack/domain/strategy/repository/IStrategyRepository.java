@@ -28,6 +28,9 @@ public interface IStrategyRepository {
 
     StrategyEntity queryStrategyEntityByStrategyId(Long strategyId);
 
+    //为责任链而加入的重载
+    String queryStrategyRuleValue(Long strategyId, String ruleModel);
+
     StrategyRuleEntity queryStrategyRule(Long strategyId, String ruleModel);
 
     String queryStrategyRuleValue(Long strategyId, Integer awardId, String ruleModel);
