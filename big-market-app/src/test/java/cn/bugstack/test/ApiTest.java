@@ -18,7 +18,7 @@ public class ApiTest {
 
     @Test
     public void test() {
-        log.info("");
+        log.info("代码评审机构成功了！");
     }
 
 }
