@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
  * @description 规则树节点指向线对象。用于衔接 from->to 节点链路关系
@@ -18,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class RuleTreeNodeLineVO {
 
     /** 规则树ID */
-    private Integer treeId;
+    private String treeId;
     /** 规则Key节点 From */
     private String ruleNodeFrom;
     /** 规则Key节点 To */
