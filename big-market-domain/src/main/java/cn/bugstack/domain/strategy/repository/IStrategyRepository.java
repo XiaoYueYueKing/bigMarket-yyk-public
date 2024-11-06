@@ -5,6 +5,7 @@ import cn.bugstack.domain.strategy.model.entity.StrategyEntity;
 import cn.bugstack.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.bugstack.domain.strategy.model.valobj.RuleTreeVO;
 import cn.bugstack.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
+import cn.bugstack.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -44,4 +45,44 @@ public interface IStrategyRepository {
      * @return 树结构信息
      */
     RuleTreeVO queryRuleTreeVOByTreeId(String treeId);
+
+
+    //以下是对超卖问题的库存的函数
+    /**
+     * 缓存奖品库存
+     *
+     * @param cacheKey   key
+     * @param awardCount 库存值
+     */
+    void cacheStrategyAwardCount(String cacheKey, Integer awardCount);
+
+    /**
+     * 缓存key，decr 方式扣减库存
+     *
+     * @param cacheKey 缓存Key
+     * @return 扣减结果
+     */
+    Boolean subtractionAwardStock(String cacheKey);
+
+    /**
+     * 写入奖品库存消费队列
+     *
+     * @param strategyAwardStockKeyVO 对象值对象
+     */
+    void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
+
+    /**
+     * 获取奖品库存消费队列
+     */
+    StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException;
+
+    /**
+     * 更新奖品库存消耗
+     *
+     * @param strategyId 策略ID
+     * @param awardId 奖品ID
+     */
+    void updateStrategyAwardStock(Long strategyId, Integer awardId);
+
+
 }

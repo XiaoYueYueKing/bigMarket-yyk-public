@@ -1,9 +1,6 @@
 package cn.bugstack.domain.strategy.service.rule.tree.factory.engine.impl;
 
-import cn.bugstack.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
-import cn.bugstack.domain.strategy.model.valobj.RuleTreeNodeLineVO;
-import cn.bugstack.domain.strategy.model.valobj.RuleTreeNodeVO;
-import cn.bugstack.domain.strategy.model.valobj.RuleTreeVO;
+import cn.bugstack.domain.strategy.model.valobj.*;
 import cn.bugstack.domain.strategy.service.rule.tree.ILogicTreeNode;
 import cn.bugstack.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import cn.bugstack.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeEngine;
@@ -31,7 +28,7 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
 
     @Override
     public DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId) {
-        DefaultTreeFactory.StrategyAwardVO strategyAwardVO = null;
+        DefaultTreeFactory.StrategyAwardVO strategyAwardData = null;
 
         // 获取基础信息
         String nextNode = ruleTreeVO.getTreeRootRuleNode();
@@ -42,11 +39,12 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         while (null != nextNode) {
             // 获取决策节点
             ILogicTreeNode logicTreeNode = logicTreeNodeGroup.get(ruleTreeNode.getRuleKey());
+            String ruleValue = ruleTreeNode.getRuleValue();
 
             // 决策节点计算
-            DefaultTreeFactory.TreeActionEntity logicEntity = logicTreeNode.logic(userId, strategyId, awardId);
+            DefaultTreeFactory.TreeActionEntity logicEntity = logicTreeNode.logic(userId, strategyId, awardId, ruleValue);
             RuleLogicCheckTypeVO ruleLogicCheckTypeVO = logicEntity.getRuleLogicCheckType();
-            strategyAwardVO = logicEntity.getStrategyAwardVO();
+            strategyAwardData = logicEntity.getStrategyAwardVO();
             log.info("决策树引擎【{}】treeId:{} node:{} code:{}", ruleTreeVO.getTreeName(), ruleTreeVO.getTreeId(), nextNode, ruleLogicCheckTypeVO.getCode());
 
             // 获取下个节点
@@ -55,7 +53,7 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         }
 
         // 返回最终结果
-        return strategyAwardVO;
+        return strategyAwardData;
     }
 
     public String nextNode(String matterValue, List<RuleTreeNodeLineVO> treeNodeLineVOList) {
@@ -68,7 +66,6 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         throw new RuntimeException("决策树引擎，nextNode 计算失败，未找到可执行节点！");
     }
 
-    //TODO:这个函数是决策树的核心方法，当状态值（决策要用哪种策略方法）相等的时候，就使用该节点的方法
     public boolean decisionLogic(String matterValue, RuleTreeNodeLineVO nodeLine) {
         switch (nodeLine.getRuleLimitType()) {
             case EQUAL:
