@@ -106,6 +106,17 @@
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>3.23.4</version>
             </dependency>
+            <dependency>
+                <groupId>org.jeasy</groupId>
+                <artifactId>easy-random-core</artifactId>
+                <version>4.3.0</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cn.bugstack.middleware/db-router-spring-boot-starter -->
+            <dependency>
+                <groupId>cn.bugstack.middleware</groupId>
+                <artifactId>db-router-spring-boot-starter</artifactId>
+                <version>1.0.2</version>
+            </dependency>
 
             <!-- 工程模块 -->
             <dependency>

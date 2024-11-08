@@ -1,0 +1,16 @@
+24-11-07.18:14:45.269 [main            ] INFO  StrategyTest           - Starting StrategyTest using Java 11.0.23 on LAPTOP-K8F0UKJ2 with PID 92860 (started by yueyueking in E:\MyFiles\WorkAndCode\Java\big-market\big-market\big-market-app)
+24-11-07.18:14:45.270 [main            ] INFO  StrategyTest           - The following 1 profile is active: "dev"
+24-11-07.18:14:45.918 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-11-07.18:14:45.921 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-11-07.18:14:45.994 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 52 ms. Found 0 Redis repository interfaces.
+24-11-07.18:14:47.103 [main            ] INFO  Version                - Redisson 3.23.4
+24-11-07.18:14:47.488 [redisson-netty-2-4] INFO  MasterPubSubConnectionPool - 1 connections initialized for 192.168.101.134/192.168.101.134:16379
+24-11-07.18:14:47.534 [redisson-netty-2-13] INFO  MasterConnectionPool   - 5 connections initialized for 192.168.101.134/192.168.101.134:16379
+24-11-07.18:14:48.788 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-11-07.18:14:48.830 [main            ] INFO  StrategyTest           - Started StrategyTest in 3.852 seconds (JVM running for 4.676)
+24-11-07.18:14:49.090 [main            ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+24-11-07.18:14:49.257 [main            ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+24-11-07.18:14:49.442 [main            ] INFO  StrategyTest           - 测试结果：true
+24-11-07.18:14:49.454 [main            ] INFO  StrategyTest           - 测试结果：101
+24-11-07.18:14:49.513 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+24-11-07.18:14:49.527 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
