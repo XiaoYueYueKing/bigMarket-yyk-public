@@ -2,6 +2,8 @@ package cn.bugstack.infrastructure.persistent.redis;
 
 import org.redisson.api.*;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Redis 服务
  *
@@ -96,7 +98,7 @@ public interface IRedisService {
      * 自减 Key 的值；1、2、3、4
      *
      * @param key 键
-     * @return 自增后的值
+     * @return 自减后的值
      */
     long decr(String key);
 
@@ -262,4 +264,6 @@ public interface IRedisService {
     <T> RBloomFilter<T> getBloomFilter(String key);
 
     Boolean setNx(String key);
+
+    Boolean setNx(String key, long expired, TimeUnit timeUnit);
 }

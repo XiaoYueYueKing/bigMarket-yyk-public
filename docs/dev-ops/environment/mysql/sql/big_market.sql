@@ -7,7 +7,7 @@
 #
 # 主机: 127.0.0.1 (MySQL 5.6.39)
 # 数据库: big_market
-# 生成时间: 2024-03-23 07:34:07 +0000
+# 生成时间: 2024-04-02 13:46:54 +0000
 # ************************************************************
 
 
@@ -85,7 +85,7 @@ LOCK TABLES `raffle_activity` WRITE;
 
 INSERT INTO `raffle_activity` (`id`, `activity_id`, `activity_name`, `activity_desc`, `begin_date_time`, `end_date_time`, `strategy_id`, `state`, `create_time`, `update_time`)
 VALUES
-	(1,100301,'测试活动','测试活动','2024-03-09 10:15:10','2034-03-09 10:15:10',100006,'create','2024-03-09 10:15:10','2024-03-16 11:17:13');
+	(1,100301,'测试活动','测试活动','2024-03-09 10:15:10','2034-03-09 10:15:10',100006,'open','2024-03-09 10:15:10','2024-03-30 12:07:36');
 
 /*!40000 ALTER TABLE `raffle_activity` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -143,7 +143,7 @@ LOCK TABLES `raffle_activity_sku` WRITE;
 
 INSERT INTO `raffle_activity_sku` (`id`, `sku`, `activity_id`, `activity_count_id`, `stock_count`, `stock_count_surplus`, `create_time`, `update_time`)
 VALUES
-	(1,9011,100301,11101,0,0,'2024-03-16 11:41:09','2024-03-16 11:59:21');
+	(1,9011,100301,11101,20,0,'2024-03-16 11:41:09','2024-03-30 17:10:07');
 
 /*!40000 ALTER TABLE `raffle_activity_sku` ENABLE KEYS */;
 UNLOCK TABLES;
