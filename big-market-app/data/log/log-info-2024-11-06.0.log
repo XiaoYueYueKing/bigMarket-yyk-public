@@ -476,7 +476,7 @@ Action:
 
 Consider defining a bean of type 'cn.bugstack.domain.strategy.service.IRaffleStock' in your configuration.
 
-24-11-06.22:04:11.569 [main            ] ERROR TestContextManager     - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@69f1a286] to prepare test instance [cn.bugstack.test.domain.RaffleStrategyTest@4b195203]
+24-11-06.22:04:11.569 [main            ] ERROR TestContextManager     - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@69f1a286] to prepare test instance [cn.bugstack.test.domain.strategy.RaffleStrategyTest@4b195203]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:98)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
