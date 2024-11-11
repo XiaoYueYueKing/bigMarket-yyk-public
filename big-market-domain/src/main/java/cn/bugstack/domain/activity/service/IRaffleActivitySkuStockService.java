@@ -3,15 +3,12 @@ package cn.bugstack.domain.activity.service;
 import cn.bugstack.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 
 /**
- * @BelongsProject: big-market
- * @BelongsPackage: cn.bugstack.domain.activity.service
- * @Author: yueyueking
- * @CreateTime: 2024-11-10  22:47
- * @Description: TODO
- * @Version: 1.0
+ * @author Fuzhengwei bugstack.cn @小傅哥
+ * @description 抽奖活动SKU库存服务
+ * @create 2024-03-30 09:55
  */
+public interface IRaffleActivitySkuStockService {
 
-public interface ISkuStock {
     /**
      * 获取活动sku库存消耗队列
      *
@@ -38,4 +35,5 @@ public interface ISkuStock {
      * @param sku 活动商品
      */
     void clearActivitySkuStock(Long sku);
+
 }

@@ -1,8 +1,4 @@
-package cn.bugstack.domain.activity.service.rule;
-
-import cn.bugstack.domain.activity.model.entity.ActivityCountEntity;
-import cn.bugstack.domain.activity.model.entity.ActivityEntity;
-import cn.bugstack.domain.activity.model.entity.ActivitySkuEntity;
+package cn.bugstack.domain.activity.service.quota.rule;
 
 /**
  * @BelongsProject: big-market
