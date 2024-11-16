@@ -25,7 +25,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -277,19 +279,17 @@ public class ActivityRepository implements IActivityRepository {
         raffleActivityAccountReq.setUserId(userId);
         raffleActivityAccountReq.setActivityId(activityId);
         RaffleActivityAccount raffleActivityAccountRes = raffleActivityAccountDao.queryActivityAccountByUserId(raffleActivityAccountReq);
-        if(raffleActivityAccountRes == null){
-            return null;
-        }
+        if (null == raffleActivityAccountRes) return null;
         // 2. 转换对象
         return ActivityAccountEntity.builder()
                 .userId(raffleActivityAccountRes.getUserId())
                 .activityId(raffleActivityAccountRes.getActivityId())
-                .totalCount(raffleActivityAccountReq.getTotalCount())
-                .totalCountSurplus(raffleActivityAccountReq.getTotalCountSurplus())
-                .dayCount(raffleActivityAccountReq.getDayCount())
-                .dayCountSurplus(raffleActivityAccountReq.getDayCountSurplus())
-                .monthCount(raffleActivityAccountReq.getMonthCount())
-                .monthCountSurplus(raffleActivityAccountReq.getMonthCountSurplus())
+                .totalCount(raffleActivityAccountRes.getTotalCount())
+                .totalCountSurplus(raffleActivityAccountRes.getTotalCountSurplus())
+                .dayCount(raffleActivityAccountRes.getDayCount())
+                .dayCountSurplus(raffleActivityAccountRes.getDayCountSurplus())
+                .monthCount(raffleActivityAccountRes.getMonthCount())
+                .monthCountSurplus(raffleActivityAccountRes.getMonthCountSurplus())
                 .build();
     }
 
@@ -434,5 +434,20 @@ public class ActivityRepository implements IActivityRepository {
         }finally {
             dbRouter.clear();
         }
+    }
+
+    @Override
+    public List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId) {
+        List<RaffleActivitySku> raffleActivitySkus = raffleActivitySkuDao.queryActivitySkuListByActivityId(activityId);
+        List<ActivitySkuEntity> activitySkuEntities = new ArrayList<>(raffleActivitySkus.size());
+        for (RaffleActivitySku raffleActivitySku : raffleActivitySkus){
+            ActivitySkuEntity activitySkuEntity = new ActivitySkuEntity();
+            activitySkuEntity.setSku(raffleActivitySku.getSku());
+            activitySkuEntity.setActivityCountId(raffleActivitySku.getActivityCountId());
+            activitySkuEntity.setStockCount(raffleActivitySku.getStockCount());
+            activitySkuEntity.setStockCountSurplus(raffleActivitySku.getStockCountSurplus());
+            activitySkuEntities.add(activitySkuEntity);
+        }
+        return activitySkuEntities;
     }
 }

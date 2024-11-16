@@ -9,5 +9,6 @@ package cn.bugstack.domain.activity.service.armory;
  * @Version: 1.0
  */
 public interface IActivityArmory {
+    boolean assembleActivitySkuByActivityId(Long activityId);
     boolean assembleActivitySku(Long sku);
 }
