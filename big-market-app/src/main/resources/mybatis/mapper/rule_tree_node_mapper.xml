@@ -17,5 +17,13 @@
         from rule_tree_node
         where tree_id = #{treeId}
     </select>
+    <select id="queryRuleLocks" resultType="cn.bugstack.infrastructure.persistent.po.RuleTreeNode">
+        select tree_id, rule_value
+        from rule_tree_node
+        where rule_key = 'rule_lock' and tree_id in
+        <foreach item="treeId" index="index" collection="array" open="(" separator="," close=")">
+            #{treeId}
+        </foreach>
+    </select>
 
 </mapper>
