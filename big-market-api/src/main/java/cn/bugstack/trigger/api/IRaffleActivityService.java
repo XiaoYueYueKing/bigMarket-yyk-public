@@ -3,6 +3,9 @@ package cn.bugstack.trigger.api;
 import cn.bugstack.trigger.api.dto.ActivityDrawRequestDTO;
 import cn.bugstack.trigger.api.dto.ActivityDrawResponseDTO;
 import cn.bugstack.types.model.Response;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @BelongsProject: big-market
@@ -26,4 +29,12 @@ public interface IRaffleActivityService {
      * @return 返回结果
      */
     Response<ActivityDrawResponseDTO> draw(ActivityDrawRequestDTO request);
+
+    /**
+     * 日历签到返利接口
+     *
+     * @param userId 用户ID
+     * @return 签到结果
+     */
+    Response<Boolean> calendarSignRebate(String userId);
 }
