@@ -11,7 +11,6 @@ import cn.bugstack.domain.rebate.repository.IBehaviorRebateRepository;
 import cn.bugstack.types.common.Constants;
 import cn.bugstack.types.event.BaseEvent;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -85,5 +84,10 @@ public class BehaviorRebateService implements IBehaviorRebateService{
         behaviorRebateRepository.saveUserRebateRecord(behaviorEntity.getUserId(), behaviorRebateAggregates);
         // 4. 返回订单ID集合
         return orderIds;
+    }
+
+    @Override
+    public List<BehaviorRebateOrderEntity> queryOrderByOutBusinessNo(String userId, String outBusinessNo){
+        return behaviorRebateRepository.queryOrderByOutBusinessNo(userId, outBusinessNo);
     }
 }

@@ -27,7 +27,7 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
     protected IStrategyDispatch strategyDispatch;
 
     // 根据用户ID查询用户抽奖消耗的积分值，本章节我们先写死为固定的值。后续需要从数据库中查询。
-    public Long userScore = 0L;
+//    public Long userScore = 0L;
 
     /**
      * 权重责任链过滤；
@@ -65,9 +65,12 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
          *      .max(Comparator.naturalOrder())
          *      .orElse(null);
          */
+        //yyk：用户的积分值(根据次数过滤权重)
+        // 当用户抽奖到60次后，可以必中102奖品
+        Integer userScore = repository.queryActivityAccountTotalUseCount(userId, strategyId);
         Long nextValue = analyticalSortedKeys.stream()
                 .sorted(Comparator.reverseOrder())
-                .filter(analyticalSortedKeyValue -> userScore >= analyticalSortedKeyValue)
+                .filter(analyticalSortedKeyValue -> userScore  >= analyticalSortedKeyValue)
                 .findFirst()
                 .orElse(null);
 
