@@ -158,6 +158,8 @@ public class AwardRepository implements IAwardRepository {
                 try {
                     // 更新积分 || 创建积分账户
                     //fix：如果不存在就创建，存在就更新
+                    // yyk：（这样做是因为：高并发的情况，如果使用注释的部分代码，可能会导致更新的时候，另一个线程正好插入了，因为update的时候持有了间隙锁（记得看看），就会报异常）
+                    //所以采用上个redis锁（分布式锁），然后先查后改的操作
                     UserCreditAccount userCreditAccountRes = userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
                     if (userCreditAccountRes == null) {
                         userCreditAccountDao.insert(userCreditAccountReq);
