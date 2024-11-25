@@ -38,6 +38,10 @@ public class BackListLogicChain extends AbstractLogicChain {
                 return DefaultChainFactory.StrategyAwardVO.builder()
                         .awardId(awardId)
                         .logicModel(ruleModel())
+                        // 写入默认配置黑名单奖品值 0.01 ~ 1 积分，也可以配置到数据库表中
+                        // （yyk：黑名单配置设置为默认的操作，如果没有别的奖品配置，就默认按黑名单处理
+                        // 当然如果想在数据库里面配置好黑名单规则来用也行）
+                        .awardRuleValue("0.01,1")
                         .build();
             }
         }

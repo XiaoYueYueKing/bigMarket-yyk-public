@@ -285,7 +285,7 @@ public class ActivityRepository implements IActivityRepository {
         //封装结果
         UserRaffleOrderEntity userRaffleOrderEntity = new UserRaffleOrderEntity();
         userRaffleOrderEntity.setUserId(userRaffleOrderRes.getUserId());
-        userRaffleOrderEntity.setActivityId(userRaffleOrderEntity.getActivityId());
+        userRaffleOrderEntity.setActivityId(userRaffleOrderRes.getActivityId());
         userRaffleOrderEntity.setActivityName(userRaffleOrderRes.getActivityName());
         userRaffleOrderEntity.setStrategyId(userRaffleOrderRes.getStrategyId());
         userRaffleOrderEntity.setOrderId(userRaffleOrderRes.getOrderId());
