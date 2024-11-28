@@ -9,10 +9,6 @@ services:
     environment:
       TZ: Asia/Shanghai
       MYSQL_ROOT_PASSWORD: 123456
-    networks:
-      - my-network
-    depends_on:
-      - mysql-job-dbdata
     ports:
       - "13306:3306"
     volumes:
@@ -23,15 +19,8 @@ services:
       timeout: 10s
       retries: 10
       start_period: 15s
-    volumes_from:
-      - mysql-job-dbdata
-
-  # 自动加载数据
-  mysql-job-dbdata:
-    image: alpine:3.18.2
-    container_name: mysql-job-dbdata
-    volumes:
-      - /var/lib/mysql
+    networks:
+      - my-network
 
   # phpmyadmin https://hub.docker.com/_/phpmyadmin
   phpmyadmin:
