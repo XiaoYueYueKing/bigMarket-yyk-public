@@ -35,6 +35,8 @@ public class BehaviorRebateService implements IBehaviorRebateService{
     public List<String> createOrder(BehaviorEntity behaviorEntity) {
         // 1. 查询返利配置
         List<DailyBehaviorRebateVO> dailyBehaviorRebateVOS = behaviorRebateRepository.queryDailyBehaviorRebateConfig(behaviorEntity.getBehaviorTypeVO());
+        if (null == dailyBehaviorRebateVOS || dailyBehaviorRebateVOS.isEmpty()) return new ArrayList<>();
+
         // 2. 构建聚合对象
         //yyk：先得到订单的list,再获取聚合对象的list
         List<String> orderIds = new ArrayList<>();
@@ -49,6 +51,7 @@ public class BehaviorRebateService implements IBehaviorRebateService{
                     .rebateDesc(dailyBehaviorRebateVO.getRebateDesc())
                     .rebateType(dailyBehaviorRebateVO.getRebateType())
                     .rebateConfig(dailyBehaviorRebateVO.getRebateConfig())
+                    .outBusinessNo(behaviorEntity.getOutBusinessNo())
                     .bizId(bizId)
                     .build();
             orderIds.add(behaviorRebateOrderEntity.getOrderId());

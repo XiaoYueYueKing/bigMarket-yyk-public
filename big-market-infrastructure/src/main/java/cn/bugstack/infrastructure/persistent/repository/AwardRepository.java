@@ -111,7 +111,6 @@ public class AwardRepository implements IAwardRepository {
             dbRouter.clear();
         }
 
-
         try {
             // 发送消息【在事务外执行，如果失败还有任务补偿】
             eventPublisher.publish(task.getTopic(), task.getMessage());
