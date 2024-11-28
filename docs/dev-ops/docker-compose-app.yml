@@ -1,0 +1,50 @@
+version: '3.8'
+# 命令执行 docker-compose -f docker-compose-app.yml up -d
+services:
+  big-market-app:
+    image: fuzhengwei/big-market-app:1.0
+    container_name: big-market-app
+    restart: always
+    ports:
+      - "8091:8091"
+    environment:
+      - TZ=PRC
+      - SERVER_PORT=8091
+      - APP_CONFIG_API_VERSION=v1
+      - APP_CONFIG_CROSS_ORIGIN=*
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/big_market?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      - SPRING_HIKARI_POOL_NAME=Retail_HikariCP
+      - REDIS_SDK_CONFIG_HOST=redis
+      - REDIS_SDK_CONFIG_PORT=6379
+    volumes:
+      - ./log:/data/log
+    networks:
+      - my-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+  big-market-front-app:
+    container_name: big-market-front-app
+    image: fuzhengwei/big-market-front-app:1.1
+    restart: always
+    networks:
+      - my-network
+    ports:
+      - 3000:3000
+    environment:
+      - API_HOST_URL=http://127.0.0.1:8091
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://0.0.0.0:3000/" ]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+
+networks:
+  my-network:
+    driver: bridge
