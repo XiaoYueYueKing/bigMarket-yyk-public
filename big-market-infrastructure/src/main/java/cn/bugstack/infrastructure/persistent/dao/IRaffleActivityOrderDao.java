@@ -24,4 +24,7 @@ public interface IRaffleActivityOrderDao {
     @DBRouter
     RaffleActivityOrder queryRaffleActivityOrder(RaffleActivityOrder raffleActivityOrderReq);
     int updateOrderCompleted(RaffleActivityOrder raffleActivityOrderReq);
+    //查询超过一个月的未支付订单
+    @DBRouter
+    RaffleActivityOrder queryUnpaidActivityOrder(RaffleActivityOrder raffleActivityOrderReq);
 }
