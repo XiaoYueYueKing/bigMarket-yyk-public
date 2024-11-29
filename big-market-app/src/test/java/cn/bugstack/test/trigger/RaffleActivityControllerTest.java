@@ -106,6 +106,7 @@ public class RaffleActivityControllerTest {
         log.info("测试结果：{}", JSON.toJSONString(response));
     }
     //商品兑换
+    //注意，要数据预热再执行（清空redis然后执行test_armory(),把库存加入到redis里面）
     @Test
     public void test_creditPayExchangeSku() throws InterruptedException {
         SkuProductShopCartRequestDTO request = new SkuProductShopCartRequestDTO();
