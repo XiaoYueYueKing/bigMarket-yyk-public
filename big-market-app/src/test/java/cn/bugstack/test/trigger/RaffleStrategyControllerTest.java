@@ -5,7 +5,7 @@ import cn.bugstack.trigger.api.dto.RaffleAwardListRequestDTO;
 import cn.bugstack.trigger.api.dto.RaffleAwardListResponseDTO;
 import cn.bugstack.trigger.api.dto.RaffleStrategyRuleWeightRequestDTO;
 import cn.bugstack.trigger.api.dto.RaffleStrategyRuleWeightResponseDTO;
-import cn.bugstack.types.model.Response;
+import cn.bugstack.trigger.api.response.Response;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

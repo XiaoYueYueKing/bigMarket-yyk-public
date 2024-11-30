@@ -4,7 +4,7 @@ import cn.bugstack.trigger.api.dto.RaffleAwardListRequestDTO;
 import cn.bugstack.trigger.api.dto.RaffleAwardListResponseDTO;
 import cn.bugstack.trigger.api.dto.RaffleRequestDTO;
 import cn.bugstack.trigger.api.dto.RaffleResponseDTO;
-import cn.bugstack.types.model.Response;
+import cn.bugstack.trigger.api.response.Response;
 
 import java.util.List;
 

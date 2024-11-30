@@ -1,7 +1,7 @@
 package cn.bugstack.trigger.api;
 
 import cn.bugstack.trigger.api.dto.*;
-import cn.bugstack.types.model.Response;
+import cn.bugstack.trigger.api.response.Response;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

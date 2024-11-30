@@ -24,14 +24,14 @@ import cn.bugstack.domain.strategy.service.IRaffleStrategy;
 import cn.bugstack.domain.strategy.service.armory.IStrategyArmory;
 import cn.bugstack.trigger.api.IRaffleActivityService;
 import cn.bugstack.trigger.api.dto.*;
+import cn.bugstack.trigger.api.response.Response;
+import cn.bugstack.types.annotations.DCCValue;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
-import cn.bugstack.types.model.Response;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.framework.qual.RequiresQualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -74,6 +74,11 @@ public class RaffleActivityController implements IRaffleActivityService {
     private IRaffleActivitySkuProductService raffleActivitySkuProductService;
     @Resource
     private ICreditAdjustService creditAdjustService;
+
+    // dcc 统一配置中心动态配置降级开关
+    @DCCValue("degradeSwitch:open")
+    private String degradeSwitch;
+
     /**
      * 活动装配 - 数据预热 | 把活动配置的对应的 sku 一起装配
      *
@@ -132,6 +137,14 @@ public class RaffleActivityController implements IRaffleActivityService {
     public Response<ActivityDrawResponseDTO> draw(@RequestBody ActivityDrawRequestDTO request) {
         try{
             log.info("活动抽奖 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
+            //degradeSwitch 降级开关，默认配置了一个 open 值。之后在应用方法中判断这个值是否做降级处理。
+            if(!"open".equals(degradeSwitch)){
+                return Response.<ActivityDrawResponseDTO>builder()
+                        .code(ResponseCode.DEGRADE_SWITCH.getCode())
+                        .info(ResponseCode.DEGRADE_SWITCH.getInfo())
+                        .build();
+            }
+
             //1.参数校验
             if(StringUtils.isBlank(request.getUserId()) || request.getActivityId() == null){
                 throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());

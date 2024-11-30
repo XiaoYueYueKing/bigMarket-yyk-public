@@ -13,11 +13,10 @@ import cn.bugstack.trigger.api.IRaffleStrategyService;
 import cn.bugstack.trigger.api.dto.*;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
-import cn.bugstack.types.model.Response;
+import cn.bugstack.trigger.api.response.Response;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.dom4j.rule.Rule;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
