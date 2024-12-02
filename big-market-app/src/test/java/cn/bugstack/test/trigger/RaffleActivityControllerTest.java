@@ -31,7 +31,6 @@ import java.util.concurrent.CountDownLatch;
 public class RaffleActivityControllerTest {
     @Resource
     private IRaffleActivityService raffleActivityService;
-
     @Resource
     private CuratorFramework curatorFramework;
 
