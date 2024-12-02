@@ -140,18 +140,18 @@ redis:
       ping-interval: 60000
       keep-alive: true
 
-#dubbo:
-#  application:
-#    name: big-market
-#    version: 1.0
-#  registry:
-#    id: nacos-registry
-#    address: nacos://117.72.36.61:8848
-#  protocol:
-#    name: dubbo
-#    port: -1
-#  scan:
-#    base-packages: cn.bugstack.trigger.api
+dubbo:
+  application:
+    name: big-market
+    version: 1.0
+  registry:
+    id: nacos-registry
+    address: nacos://117.72.36.61:8848
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: cn.bugstack.trigger.api
 
 zookeeper:
   sdk:

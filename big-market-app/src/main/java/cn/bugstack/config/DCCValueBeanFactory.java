@@ -1,12 +1,17 @@
 package cn.bugstack.config;
 
 import cn.bugstack.types.annotations.DCCValue;
+import com.auth0.jwt.impl.ClaimsSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
+import org.springframework.aop.framework.AopProxy;
+import org.springframework.aop.framework.AopProxyUtils;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Field;
@@ -44,9 +49,17 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                     Object objBean = dccObjGroup.get(dccValuePath);
                     if (null == objBean) return;
                     try {
+                        Class<?> objBeanClass = objBean.getClass();
+                        // 检查 objBean 是否是代理对象
+                        if(AopUtils.isAopProxy(objBean)){
+                            // 获取代理对象的目标对象
+                            objBeanClass = AopUtils.getTargetClass(objBean);
+//                            objBeanClass = AopProxyUtils.ultimateTargetClass(objBean);
+                        }
+
                         // 1. getDeclaredField 方法用于获取指定类中声明的所有字段，包括私有字段、受保护字段和公共字段。
                         // 2. getField 方法用于获取指定类中的公共字段，即只能获取到公共访问修饰符（public）的字段。
-                        Field field = objBean.getClass().getDeclaredField(dccValuePath.substring(dccValuePath.lastIndexOf("/") + 1));
+                        Field field = objBeanClass.getClass().getDeclaredField(dccValuePath.substring(dccValuePath.lastIndexOf("/") + 1));
                         field.setAccessible(true);
                         field.set(objBean, new String(data.getData()));
                         field.setAccessible(false);
@@ -66,8 +79,18 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
 //    另外如果是首次启动，则会把自定义注解中默认配置的值，赋值给属性。如 @DCCValue("degradeSwitch:open") 赋值 open 给属性。
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        Class<?> beanClass = bean.getClass();
-        Field[] fields = beanClass.getDeclaredFields();
+        // 注意；增加 AOP 代理后，获得类的方式要通过 AopProxyUtils.getTargetClass(bean);
+        // 不能直接 bean.class 因为代理后类的结构发生变化，这样不能获得到自己的自定义注解了。
+        Class<?> targetBeanClass = bean.getClass();
+        Object targetBeanObject = bean;
+        if(AopUtils.isAopProxy(bean)){
+            //把bean的结构转换为AOP的结构
+            targetBeanClass = AopUtils.getTargetClass(bean);
+            targetBeanObject = AopProxyUtils.getSingletonTarget(bean);
+        }
+
+//        Class<?> beanClass = bean.getClass();
+        Field[] fields = targetBeanClass.getDeclaredFields();
         for (Field field : fields) {
             if (!field.isAnnotationPresent(DCCValue.class)) {
                 continue;
@@ -91,7 +114,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                     client.create().creatingParentsIfNeeded().forPath(keyPath);
                     if (StringUtils.isNotBlank(defaultValue)) {
                         field.setAccessible(true);
-                        field.set(bean, defaultValue);
+                        field.set(targetBeanObject, defaultValue);
                         field.setAccessible(false);
                     }
                     log.info("DCC 节点监听 创建节点 {}", keyPath);
@@ -99,7 +122,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                     String configValue = new String(client.getData().forPath(keyPath));
                     if (StringUtils.isNotBlank(configValue)) {
                         field.setAccessible(true);
-                        field.set(bean, configValue);
+                        field.set(targetBeanObject, configValue);
                         field.setAccessible(false);
                         log.info("DCC 节点监听 设置配置 {} {} {}", keyPath, field.getName(), configValue);
                     }
@@ -108,7 +131,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                 throw new RuntimeException(e);
             }
 
-            dccObjGroup.put(BASE_CONFIG_PATH_CONFIG.concat("/").concat(key), bean);
+            dccObjGroup.put(BASE_CONFIG_PATH_CONFIG.concat("/").concat(key), targetBeanObject);
         }
         return bean;
     }
