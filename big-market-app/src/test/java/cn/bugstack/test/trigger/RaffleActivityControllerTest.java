@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-
 /**
  * @BelongsProject: big-market
  * @BelongsPackage: cn.bugstack.test.trigger
