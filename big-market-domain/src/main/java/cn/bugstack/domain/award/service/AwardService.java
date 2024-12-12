@@ -36,7 +36,6 @@ public class AwardService implements IAwardService{
         this.sendAwardMessageEvent = sendAwardMessageEvent;
         this.distributeAwardMap = distributeAwardMap;
     }
-
     @Override
     public void saveUserAwardRecord(UserAwardRecordEntity userAwardRecordEntity) {
         // 构建消息对象
